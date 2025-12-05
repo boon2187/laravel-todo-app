@@ -39,7 +39,7 @@ services:
     image: mysql:8.0
     container_name: todo_mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root_pass
       MYSQL_DATABASE: todo_app
