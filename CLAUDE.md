@@ -3,7 +3,7 @@
 ## 技術スタック
 
 - Backend: Laravel 11 (API only)
-- Frontend: React + TypeScript + Vite + Tailwind CSS
+- Frontend: React + TypeScript + Vite + Tailwind CSS + Shadcn UI
 - Database: MySQL 8
 - Package Manager: pnpm
 - Styling: Tailwind CSS
@@ -19,33 +19,37 @@
 
 - API は /api/ プレフィックス
 - 認証は後から追加予定（user_id カラムは nullable で先に作る）
-- フロントエンドのTypeScriptコードは開発者が手動で実装する（Claudeはアドバイス・レビューのみ）
+- フロントエンドの TypeScript コードは開発者が手動で実装する（Claude はアドバイス・レビューのみ）
 
 ## フロントエンド実装方針
 
-### UIデザイン
+### UI デザイン
+
 - ダークテーマ（濃紺/紫系の背景）
-- Tailwind CSSでスタイリング
+- Tailwind CSS でスタイリング
+- ボタンとか、入力フォームなどの UI 部品は Shadcn UI を使用する
 - シンプル＆モダンなデザイン
 - レスポンシブ対応
 
 ### 主要機能
-1. Todo追加フォーム
+
+1. Todo 追加フォーム
    - テキスト入力欄
    - "Add Task" ボタン
-2. Todo一覧表示
+2. Todo 一覧表示
    - 作成日時降順で表示
-   - 各Todoに編集・削除ボタン
+   - 各 Todo に編集・削除ボタン
    - インライン編集機能（編集モードへの切り替え）
    - 完了/未完了のトグル（チェックボックスまたはクリック）
-3. Todo編集
+3. Todo 編集
    - インライン編集（その場で入力フィールド表示）
    - "Update Task" ボタンで更新
-4. Todo削除
+4. Todo 削除
    - ゴミ箱アイコンクリックで削除
    - （オプション）確認ダイアログ
 
 ### コンポーネント構成案
+
 ```
 src/
 ├── components/
@@ -63,13 +67,15 @@ src/
 ```
 
 ### 状態管理
-- React Hooksベース（useState, useEffect）
-- カスタムフック（useTodos）でAPI呼び出しとstate管理を集約
-- 必要に応じてContext APIやZustandも検討可能
 
-### API連携
+- React Hooks ベース（useState, useEffect）
+- カスタムフック（useTodos）で API 呼び出しと state 管理を集約
+- 必要に応じて Context API や Zustand も検討可能
+
+### API 連携
+
 - バックエンド: `http://localhost:8000/api/todos`
-- HTTPクライアント: axios または fetch
+- HTTP クライアント: axios または fetch
 - 必要なエンドポイント:
   - `GET /api/todos` - 一覧取得
   - `POST /api/todos` - 新規作成
@@ -78,6 +84,7 @@ src/
   - `PATCH /api/todos/{id}/toggle` - 完了トグル
 
 ### 型定義
+
 ```typescript
 interface Todo {
   id: number;
@@ -90,11 +97,12 @@ interface Todo {
 ```
 
 ### 実装の進め方
+
 1. 型定義作成（types/todo.ts）
-2. API通信関数作成（api/todos.ts）
+2. API 通信関数作成（api/todos.ts）
 3. カスタムフック作成（hooks/useTodos.tsx）
 4. コンポーネント作成（TodoForm, TodoItem, TodoList）
-5. App.tsxでコンポーネント統合
+5. App.tsx でコンポーネント統合
 6. スタイリング調整
 
 ```
