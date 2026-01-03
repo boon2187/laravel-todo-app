@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class TodoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 全Todoの取得
      */
     public function index(): JsonResponse
     {
@@ -20,7 +20,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新しいTodoの作成
      */
     public function store(Request $request): JsonResponse
     {
@@ -40,7 +40,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 特定のTodoの取得
      */
     public function show(Todo $todo): JsonResponse
     {
@@ -48,7 +48,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * （特定の）Todoの更新
      */
     public function update(Request $request, Todo $todo): JsonResponse
     {
@@ -64,7 +64,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * （特定の）Todoの削除
      */
     public function destroy(Todo $todo): JsonResponse
     {
@@ -74,7 +74,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Toggle the completion status of the todo.
+     * 完了状態のtoggle
      */
     public function toggle(Todo $todo): JsonResponse
     {
