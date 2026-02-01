@@ -129,3 +129,5 @@ backend/と frontend/は空のディレクトリで良い。
 
 その後、コンテナを起動して、Laravel 雛形と React 雛形を作成するところまで
 一緒に進めたい。
+
+docker compose コマンドを使い、docker-compose コマンドは使用しないこと

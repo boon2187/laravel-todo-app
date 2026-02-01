@@ -21,6 +21,9 @@ services:
     container_name: todo_php
     volumes:
       - ./backend:/var/www/backend
+      - storage-framework:/var/www/backend/storage/framework
+      - storage-logs:/var/www/backend/storage/logs
+      - bootstrap-cache:/var/www/backend/bootstrap/cache
     working_dir: /var/www/backend
     depends_on:
       - mysql
@@ -60,7 +63,6 @@ services:
       - ./frontend:/app
       - node-modules:/app/node_modules
     working_dir: /app
-    command: sh -c "pnpm install && pnpm dev --host"
     networks:
       - todo-network
 
@@ -71,3 +73,6 @@ networks:
 volumes:
   mysql-data:
   node-modules:
+  storage-framework:
+  storage-logs:
+  bootstrap-cache:
