@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/layout/Header";
 import TodoList from "./components/todo/TodoList";
 import TodoForm from "./components/todo/TodoForm";
@@ -15,10 +15,21 @@ function App() {
     removeTodo,
     toggleTodoCompletion,
   } = useTodos();
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center">
       <Header />
-      <TodoForm onAddTodo={addTodo} />
+      <div>
+        <TodoForm onAddTodo={addTodo} />
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo.id}>{todo.title}</li>
+          ))}
+        </ul>
+      </div>
       <TodoList />
     </div>
   );
