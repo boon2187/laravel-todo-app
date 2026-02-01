@@ -90,5 +90,15 @@ export const useTodos = (): UseTodosReturn => {
       setError("Todoの完了トグルに失敗しました。");
     }
   };
-  // useTodosの返り値
+  // useTodosの返り値（操作関数を返す）
+  return {
+    todos,
+    loading,
+    error,
+    fetchTodos,
+    addTodo,
+    editTodo,
+    removeTodo,
+    toggleTodoCompletion,
+  };
 };
