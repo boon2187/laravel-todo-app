@@ -1,4 +1,10 @@
-import { createTodo, deleteTodo, getTodos, updateTodo } from "@/api/todos";
+import {
+  createTodo,
+  deleteTodo,
+  getTodos,
+  toggleTodo,
+  updateTodo,
+} from "@/api/todos";
 import { Todo, TodoCreate, TodoUpdate } from "@/types/todo";
 import { useState } from "react";
 
@@ -72,5 +78,17 @@ export const useTodos = (): UseTodosReturn => {
     }
   };
 
+  // todoの完了トグル
+  const toggleTodoCompletion = async (id: number) => {
+    setError(null);
+    try {
+      const toggledTodo = await toggleTodo(id);
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) => (todo.id === id ? toggledTodo : todo)),
+      );
+    } catch (e) {
+      setError("Todoの完了トグルに失敗しました。");
+    }
+  };
   // useTodosの返り値
 };
