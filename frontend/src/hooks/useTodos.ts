@@ -1,3 +1,4 @@
+import { getTodos } from "@/api/todos";
 import { Todo, TodoCreate, TodoUpdate } from "@/types/todo";
 import { useState } from "react";
 
@@ -21,5 +22,20 @@ export const useTodos = (): UseTodosReturn => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // actionsの定義
+  // actionsの定義・実装
+  // todo一覧取得
+  const fetchTodos = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getTodos();
+      setTodos(data);
+    } catch (e) {
+      setError("Todoの取得に失敗しました。");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // useTodosの返り値
 };
