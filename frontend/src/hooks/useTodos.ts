@@ -1,4 +1,4 @@
-import { createTodo, getTodos } from "@/api/todos";
+import { createTodo, getTodos, updateTodo } from "@/api/todos";
 import { Todo, TodoCreate, TodoUpdate } from "@/types/todo";
 import { useState } from "react";
 
@@ -47,6 +47,19 @@ export const useTodos = (): UseTodosReturn => {
       setError("Todoの作成に失敗しました。");
     }
   };
+
+  // todoの更新
+  const editTodo = async (id: number, data: TodoUpdate) =>{
+    setError(null);
+    try {
+        const updatedTodo = await updateTodo(id, data);
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) => (todo.id === id ? updatedTodo : todo))
+        );
+    } catch (e) {
+      setError("Todoの更新に失敗しました。");
+    }
+  }
 
   // useTodosの返り値
 };
