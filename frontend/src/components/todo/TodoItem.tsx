@@ -1,4 +1,6 @@
 import { Todo, TodoUpdate } from "@/types/todo";
+import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
 
 interface TodoItemProps {
   todo: Todo;
@@ -13,5 +15,16 @@ export default function TodoItem({
   onUpdate,
   onDelete,
 }: TodoItemProps) {
-  return ;
+  return (
+    <div className="flex">
+      <Checkbox
+        checked={todo.is_completed}
+        onCheckedChange={() => onToggle(todo.id)}
+      />
+      <span className={todo.is_completed ? "line-through text-gray-500" : ""}>
+        {todo.title}
+      </span>
+      <Button onClick={() => onDelete(todo.id)}>削除</Button>
+    </div>
+  );
 }
