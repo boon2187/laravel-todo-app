@@ -1,6 +1,8 @@
 import { Todo, TodoUpdate } from "@/types/todo";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import { Input } from "../ui/input";
 
 interface TodoItemProps {
   todo: Todo;
@@ -15,6 +17,21 @@ export default function TodoItem({
   onUpdate,
   onDelete,
 }: TodoItemProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState(todo.title);
+
+  const handleUpdate = async () => {
+    await onUpdate(todo.id, {
+      title: editTitle,
+      due_date: todo.due_date,
+      is_completed: todo.is_completed,
+    });
+    setIsEditing(false);
+  };
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditTitle(todo.title);
+  };
   return (
     <div className="flex">
       <Checkbox
@@ -22,9 +39,26 @@ export default function TodoItem({
         onCheckedChange={() => onToggle(todo.id)}
       />
       <span className={todo.is_completed ? "line-through text-gray-500" : ""}>
-        {todo.title}
+        {isEditing ? (
+          <Input
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+          />
+        ) : (
+          todo.title
+        )}
       </span>
-      <Button onClick={() => onDelete(todo.id)}>削除</Button>
+      {isEditing ? (
+        <div>
+          <Button onClick={handleUpdate}>更新</Button>
+          <Button onClick={handleCancel}>キャンセル</Button>
+        </div>
+      ) : (
+        <div>
+          <Button onClick={() => setIsEditing(true)}>編集</Button>
+          <Button onClick={() => onDelete(todo.id)}>削除</Button>
+        </div>
+      )}
     </div>
   );
 }
