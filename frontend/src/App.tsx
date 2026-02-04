@@ -24,13 +24,8 @@ function App() {
       <Header />
       <div>
         <TodoForm onAddTodo={addTodo} />
-        <ul>
-          {todos.map((todo) => (
-            <li key={todo.id}>{todo.title}</li>
-          ))}
-        </ul>
+        <TodoList todos={todos} onToggle={toggleTodoCompletion} onUpdate={editTodo} onDelete={removeTodo} />
       </div>
-      <TodoList />
     </div>
   );
 }
