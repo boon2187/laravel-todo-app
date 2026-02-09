@@ -43,6 +43,9 @@ export default function TodoItem({
           <Input
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleUpdate();
+            }}
           />
         ) : (
           todo.title
