@@ -15,7 +15,7 @@ export default function TodoList({
   onDelete,
 }: TodoListProps) {
   return (
-    <ul>
+    <ul className="space-y-3">
       {todos.map((todo) => (
         <li key={todo.id}>
           <TodoItem

@@ -24,9 +24,15 @@ export default function TodoForm({ onAddTodo }: TodoFormProps) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="新しいTODOを追加"
+        placeholder="What is the task today?"
+        className="flex-1 border-none bg-slate-300 text-slate-900 placeholder:text-slate-500"
       />
-      <Button type="submit">追加</Button>
+      <Button
+        type="submit"
+        className="bg-violet-500 text-white hover:bg-violet-600"
+      >
+        Add Task
+      </Button>
     </form>
   );
 }

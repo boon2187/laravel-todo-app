@@ -20,11 +20,17 @@ function App() {
     fetchTodos();
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center">
-      <Header />
-      <div>
+    <div className="min-h-screen bg-slate-900 text-white">
+      <div className="mx-auto flex max-w-xl flex-col gap-6 px-4 py-8">
+        <Header />
+        <h1 className="text-center text-4xl font-bold">Get Things Done!</h1>
         <TodoForm onAddTodo={addTodo} />
-        <TodoList todos={todos} onToggle={toggleTodoCompletion} onUpdate={editTodo} onDelete={removeTodo} />
+        <TodoList
+          todos={todos}
+          onToggle={toggleTodoCompletion}
+          onUpdate={editTodo}
+          onDelete={removeTodo}
+        />
       </div>
     </div>
   );
